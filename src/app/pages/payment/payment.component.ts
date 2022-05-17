@@ -28,19 +28,16 @@ export class PaymentComponent implements OnInit {
 
   constructor(public subService: SubscribeService, private authService: AuthenticationService, private router: Router, private msgService: MessageServiceService) {
     if (!authService.isSignedIn) {
-      this.router.navigate(["SignIn"]).then(() => {
-        msgService.showMassage("You need to sign in first", "bg-red-500").then();
-      });
+      msgService.showMassage("You need to sign in first", "bg-red-500").then();
+      this.router.navigate(["SignIn"])
     }
     if (subService.choice == this.plans.None) {
-      this.router.navigate(["subscribe"]).then(() => {
-        msgService.showMassage("Choose a plan first", "bg-red-500").then();
-      });
+      msgService.showMassage("Choose a plan first", "bg-red-500").then();
+      this.router.navigate(["subscribe"])
     }
     if(subService.isSubscribed){
-      this.router.navigate(["services"]).then(()=> {
-        msgService.showMassage("You are paid for a subscription", "bg-red-500").then();
-      });
+      msgService.showMassage("You are paid for a subscription", "bg-red-500").then();
+      this.router.navigate(["services"])
     }
   }
 
@@ -55,12 +52,7 @@ export class PaymentComponent implements OnInit {
 
   submit() {
     this.subService.subscribeUser(this.paymentModel, this.period);
-    this.router.navigate(["services"]).then(()=>{
-      this.msgService.showMassage("You subscribed successfully", "bg-teal-500")
-      setTimeout(()=>{
-        window.location.reload()
-      },1000)
-    });
+    this.router.navigate(["services"]).then();
   }
 
 
