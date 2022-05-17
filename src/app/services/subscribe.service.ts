@@ -21,7 +21,7 @@ export class SubscribeService {
     localStorage.setItem("cardNumber", paymentModel.cardNumber.join(""));
     localStorage.setItem("cvv", paymentModel.cvvNumber);
     localStorage.setItem("period", period.toString());
-    localStorage.setItem("expireDate", paymentModel.expireDate.toDateString());
+    localStorage.setItem("expireDate", paymentModel.expireDate.toString());
     localStorage.setItem("name", paymentModel.firstName + " " + paymentModel.secondName);
     localStorage.setItem("address", `${paymentModel.streetAddress} - ${paymentModel.apartmentNumber}, ${paymentModel.zipCode} ${paymentModel.state}`);
     this.msgService.showMassage("You subscribed successfully", "bg-teal-500")
