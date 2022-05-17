@@ -1,0 +1,118 @@
+<section class="w-full grid grid-cols-1 lg:grid-cols-2 gap-6 justify-center items-center justify-items-center py-32 bg-gray-50">
+  <form action="#" class="flex flex-col gap-16 px-6">
+    <div class="flex flex-col gap-6">
+      <h1 class="text-3xl border-b-2">Payment Details</h1>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="flex flex-col">
+          <input type="text" name="firstName" id="firstName" required minlength="4" [(ngModel)]="paymentModel.firstName"
+                 class="border-2 border-gray-500 w-full px-6 py-3 rounded focus:text-secondary-color focus:outline-secondary-color text-xl">
+          <label for="firstName">First Name</label>
+        </div>
+        <div class="flex flex-col">
+          <input type="text" name="lastName" id="lastName" required minlength="4" [(ngModel)]="paymentModel.secondName"
+                 class="border-2 border-gray-500 w-full px-6 py-3 rounded focus:text-secondary-color focus:outline-secondary-color text-xl">
+          <label for="lastName">Last Name</label>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 2xl:grid-cols-3 gap-6 ">
+        <div class="flex flex-col col-span-2">
+          <div class="grid grid-cols-4 border-2 border-gray-500  rounded text-center focus-within:border-secondary-color">
+            <div class="flex items-center justify-center">
+              <input type="text" class="py-3  text-center  w-full focus:text-secondary-color focus:outline-none text-xl" name="cardNumber" minlength="4" maxlength="4" [(ngModel)]="paymentModel.cardNumber[0]">
+              <p class="text-2xl">-</p>
+            </div>
+            <div class="flex items-center">
+              <input type="text" class="py-3  text-center w-full focus:text-secondary-color focus:outline-none text-xl" name="cardNumber" minlength="4" maxlength="4" [(ngModel)]="paymentModel.cardNumber[1]">
+              <p class="text-2xl">-</p>
+            </div>
+            <div class="flex items-center">
+              <input type="text" class="py-3 text-center w-full focus:text-secondary-color focus:outline-none text-xl" name="cardNumber" minlength="4" maxlength="4" [(ngModel)]="paymentModel.cardNumber[2]">
+              <p class="text-2xl">-</p>
+            </div>
+            <div class="flex items-center">
+              <input type="text" class="py-3 text-center w-full focus:text-secondary-color focus:outline-none text-xl" name="cardNumber" minlength="4" maxlength="4" [(ngModel)]="paymentModel.cardNumber[3]">
+            </div>
+          </div>
+          <label>Card Number</label>
+        </div>
+        <div class="flex gap-6">
+          <div class="flex flex-col">
+            <input type="text" name="CVVNumber" id="CVVNumber" required minlength="3" maxlength="3"
+                   [(ngModel)]="paymentModel.cvvNumber"
+                   class="border-2 w-14 border-gray-500 px-3 py-3 rounded focus:text-secondary-color focus:outline-secondary-color">
+            <label for="CVVNumber">CVV</label>
+          </div>
+          <div class="flex flex-col">
+            <input type="date" name="expireDate" id="expireDate" required [(ngModel)]="paymentModel.expireDate"
+                   class="border-2 w-full border-gray-500 w-full py-3 rounded focus:text-secondary-color focus:outline-secondary-color text-xl">
+            <label for="expireDate">Expire Date</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-6">
+      <h1 class="text-3xl border-b-2">Address Details</h1>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="flex flex-col col-span-1 lg:col-span-3">
+          <input type="text" name="StreetAddress" id="StreetAddress" [(ngModel)]="paymentModel.streetAddress"
+                 class="border-2 border-gray-500 w-full px-6 py-3 rounded focus:text-secondary-color focus:outline-secondary-color text-xl">
+          <label for="StreetAddress">Street Address</label>
+        </div>
+        <div class="flex flex-col">
+          <input type="text" name="ApartmentNumber" id="ApartmentNumber" [(ngModel)]="paymentModel.apartmentNumber"
+                 class="border-2 border-gray-500 px-6 py-3 rounded focus:text-secondary-color focus:outline-secondary-color text-xl">
+          <label for="ApartmentNumber">Apartment Number</label>
+        </div>
+        <div class="flex flex-col">
+          <input type="text" name="ZipCode" id="ZipCode" [(ngModel)]="paymentModel.zipCode"
+                 class="border-2  border-gray-500 px-6 py-3 rounded focus:text-secondary-color focus:outline-secondary-color text-xl">
+          <label for="ZipCode">Zip Code</label>
+        </div>
+        <div class="flex flex-col">
+          <input type="text" name="State" id="State" [(ngModel)]="paymentModel.state"
+                 class="border-2  border-gray-500 px-6 py-3 rounded focus:text-secondary-color focus:outline-secondary-color text-xl">
+          <label for="State">State</label>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="flex flex-col px-6 w-full h-full content-between justify-between">
+    <h1 class="text-3xl font-light text-center">Order Summary</h1>
+    <div class="grid grid-cols-2">
+      <button
+        class="text-xl {{period == periodEnum.Yearly? 'bg-primary-color text-white':''}}  py-1 border rounded-tl rounded-bl"
+        (click)="periodToggle(periodEnum.Yearly)">Yearly
+      </button>
+      <button
+        class="text-xl {{period == periodEnum.Monthly? 'bg-primary-color text-white':''}} py-1 border rounded-tr rounded-br"
+        (click)="periodToggle(periodEnum.Monthly)">Monthly
+      </button>
+    </div>
+    <div class="flex flex-nowrap text-xl justify-between border-b">
+      <ng-container [ngSwitch]="subService.choice">
+        <p *ngSwitchCase="plans.Basic">Basic Plan</p>
+        <p *ngSwitchCase="plans.Personal">Personal Plan</p>
+        <p *ngSwitchCase="plans.professional">Professional Plan</p>
+        <p>{{subService.choice |currency}}</p>
+      </ng-container>
+    </div>
+    <div class="flex flex-nowrap text-xl justify-between">
+      <p>(VAT) 15%</p>
+      <p>{{(subService.choice * 0.15).toPrecision(3) |currency}}</p>
+    </div>
+
+    <div [ngSwitch]="period">
+      <div class="flex flex-nowrap text-xl justify-between" *ngSwitchCase="periodEnum.Yearly">
+        <p>Total 12 months</p>
+        <p> {{((subService.choice + subService.choice * 0.15) * 12).toPrecision(3) |currency}} </p>
+      </div>
+      <div class="flex flex-nowrap text-xl justify-between" *ngSwitchCase="periodEnum.Monthly">
+        <p>Total 1 month</p>
+        <p> {{((subService.choice) + subService.choice * 0.15).toPrecision(3) |currency}} </p>
+      </div>
+    </div>
+    <button class="bg-primary-color text-white text-xl rounded py-2 text-xl border-2 border-transparent hover:border-primary-color hover:bg-transparent hover:text-black transition-all cursor-pointer" (click)="submit()">Send</button>
+  </div>
+</section>

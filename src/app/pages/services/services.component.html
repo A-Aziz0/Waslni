@@ -1,0 +1,52 @@
+<section class="px-6 pt-32 flex flex-col gap-32">
+
+  <div class="flex w-full items-center justify-center gap-16 text-2xl">
+    <h1 class="">Total:</h1>
+    <p>{{getTotal() |currency}}</p>
+  </div>
+
+  <div class="h-screen w-full grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div class="overflow-auto flex flex-col">
+      <div *ngFor="let rest of restaurants"
+           class="flex items-center px-6 my-3 py-3 {{(rest.id == restaurantsId?'bg-secondary-color text-white':'bg-gray-100 text-gray-500 hover:text-black')}} border-b cursor-pointer   transition-all hover:-translate-y-1"
+           (click)="pickRestaurants(rest.id)">
+        <h2 class="h-10 w-10 rounded-full bg-white flex justify-center items-center mr-6">{{rest.id}}</h2>
+        <div class="flex items-center h-16 w-16 border-2 border-secondary-color rounded-full overflow-hidden mr-6">
+          <img class="object-cover" src="assets/images/logo.png" alt="">
+        </div>
+        <div class="flex flex-col">
+          <p class="text-xl font-extrabold ">{{rest.name}}</p>
+          <p class="">{{rest.cuisine}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="overflow-auto">
+      <div *ngIf="restaurantsId" class="flex flex-col">
+        <p class="text-xl font-semibold">{{restaurants[restaurantsId - 1].name}}-Sections</p>
+      </div>
+      <div *ngIf="isPicked" class="grid grid-cols-2 2xl:grid-cols-3 justify-start items-start gap-3 text-white p-3">
+        <div *ngFor="let section of sectionList" (click)="pickSection(section.id)"
+             class=" h-32 w-full rounded flex flex-col justify-center items-center cursor-pointer
+                border-2 hover:bg-transparent hover:border-primary-color hover:text-black
+               hover:scale-105 hover:font-extrabold transition-all {{section.id == sectionId?'bg-transparent border-primary-color text-black':'bg-primary-color border-transparent'}}">
+
+          <p class="text-xl">{{section.id}}</p>
+          <p class="text-xl">{{section.name}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="overflow-auto">
+      <div *ngIf="sectionId" class="grid grid-cols-2 2xl:grid-cols-3 justify-start items-start gap-4 text-white p-3">
+        <div *ngFor="let item of filterItemsBySection(sectionId)" class="h-64 w-full w-full object-fill relative">
+          <div class="absolute flex bottom-0 left-0 z-10 justify-between items-center w-full bg-white">
+            <button class="text-5xl bg-primary-color h-10 w-10" (click)="addItemToCart(item.id,item.price,sectionId,restaurantsId)">+</button>
+            <p class="text-black">{{item.price|currency}}</p>
+            <button class="text-5xl bg-primary-color h-10 w-10 " (click)="removeItemFromCart(item.id,item.price,sectionId,restaurantsId)">-</button>
+          </div>
+          <img src="{{item.imgURL}}" class="object-cover w-full h-full hover:-translate-y-1 transition-all" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

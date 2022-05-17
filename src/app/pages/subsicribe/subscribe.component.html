@@ -1,0 +1,86 @@
+<section class="p-6 lg:px-32 h-fit mt-16">
+  <div class="flex flex-col gap-3">
+    <h2 class="text-2xl lg:text-5xl border-b pb-1">Choose your plan</h2>
+    <p>We care about your convenience</p>
+    <app-primary-btn text="Pay" [link]="subService.choice != plan.None?'/payment':'#'" class="self-end {{subService.choice != plan.None?'animatePayBtn':'opacity-40'}}" ></app-primary-btn>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-4 mt-16 shrink-0 gap-16 content-center justify-items-center">
+    <div
+      class="cursor-pointer flex flex-col w-fit  p-6  rounded-lg lg:col-start-2 shadow-md  transition-all {{subService.choice == plan.None?'animatePayBtn':''}} {{subService.choice == plan.Basic?'scale-110 -translate-y-6 shadow shadow-white bg-secondary-color text-white':'text-gray-600 bg-gray-100'}}"
+    (click)="setChoice(plan.Basic)">
+      <h3 class="text-xl font-bold">Basic plan</h3>
+      <p>Our most popular plan</p>
+      <p class="text-4xl font-bold mt-16 mb-6">$9.99<span class="text-sm">/month</span></p>
+    </div>
+
+    <div
+      class="cursor-pointer flex flex-col w-fit p-6  rounded-lg lg:col-start-3 shadow-md  transition-all  relative overflow-hidden {{subService.choice == plan.None?'animatePayBtn':''}} {{subService.choice == plan.Personal?'scale-110 -translate-y-6 shadow shadow-white bg-secondary-color text-white':'text-gray-600 bg-gray-100'}}"
+      (click)="setChoice(plan.Personal)">
+      <p
+        class="absolute -top-0 left-1/2 -translate-x-1/2 font-extrabold bg-primary-color text-white w-full text-center">
+        Best</p>
+      <h3 class="text-xl font-bold">Personal plan</h3>
+      <p>Our recommended plan</p>
+      <p class="text-4xl font-bold mt-16 mb-6">$19.99<span class="text-sm">/month</span></p>
+    </div>
+    <div
+      class="cursor-pointer flex flex-col w-fit p-6  rounded-lg lg:col-start-4 shadow-md  transition-all {{subService.choice == plan.None?'animatePayBtn':''}} {{subService.choice == plan.professional?'scale-110 -translate-y-6 shadow shadow-white bg-secondary-color text-white':'text-gray-600 bg-gray-100'}}"
+      (click)="setChoice(plan.professional)">
+      <h3 class="text-xl font-bold">professional plan</h3>
+      <p>Our extreme plan</p>
+      <p class="text-4xl font-bold mt-16 mb-6">$29.99<span class="text-sm">/month</span></p>
+    </div>
+  </div>
+
+  <div>
+    <h3 class="mt-16 border-b-2 border-white font-semibold text-lg">Features</h3>
+    <div class="grid grid-cols-5 lg:grid-cols-4 py-4 shrink-0 gap-16 border-b border-gray-400">
+      <p class="whitespace-nowrap col-span-2 lg:col-span-1">basic feature</p>
+      <fa-icon [icon]="circleCheck" class="text-2xl text-center"></fa-icon>
+      <fa-icon [icon]="circleCheck" class="text-2xl text-center"></fa-icon>
+      <fa-icon [icon]="circleCheck" class="text-2xl text-center"></fa-icon>
+    </div>
+    <div class="grid grid-cols-5 lg:grid-cols-4 py-4 shrink-0 gap-16 border-b border-gray-400">
+      <p class="whitespace-nowrap col-span-2 lg:col-span-1">Next day delivery</p>
+      <fa-icon [icon]="circleCheck" class="text-2xl text-center"></fa-icon>
+      <fa-icon [icon]="circleCheck" class="text-2xl text-center"></fa-icon>
+      <fa-icon [icon]="circleCheck" class="text-2xl text-center"></fa-icon>
+    </div>
+    <div class="grid grid-cols-5 lg:grid-cols-4 py-4 shrink-0 gap-16 border-b border-gray-400">
+      <p class="whitespace-nowrap col-span-2 lg:col-span-1">Fast Delivery</p>
+      <fa-icon [icon]="circleX" class="text-2xl text-center"></fa-icon>
+      <fa-icon [icon]="circleX" class="text-2xl text-center"></fa-icon>
+      <fa-icon [icon]="circleCheck" class="text-2xl text-center"></fa-icon>
+
+    </div>
+    <div class="grid grid-cols-5 lg:grid-cols-4 py-4 shrink-0 gap-16 border-b border-gray-400">
+      <p class="whitespace-nowrap col-span-2 lg:col-span-1">Deliveries</p>
+      <p class="text-center">3</p>
+      <p class="text-center">10</p>
+      <p class="text-center">25</p>
+    </div>
+  </div>
+
+  <div>
+    <h3 class="mt-16 border-b-2 border-white font-semibold text-lg">Support</h3>
+    <div class="grid grid-cols-5 lg:grid-cols-4 py-4 shrink-0 gap-16 border-b border-gray-400">
+      <p class="whitespace-nowrap col-span-2 lg:col-span-1">Basic support</p>
+      <fa-icon [icon]="circleCheck" class="text-2xl text-center"></fa-icon>
+      <fa-icon [icon]="circleCheck" class="text-2xl text-center"></fa-icon>
+      <fa-icon [icon]="circleCheck" class="text-2xl text-center"></fa-icon>
+    </div>
+    <div class="grid grid-cols-5 lg:grid-cols-4 py-4 shrink-0 gap-16 border-b border-gray-400">
+      <p class="whitespace-nowrap col-span-2 lg:col-span-1">Life support</p>
+      <fa-icon [icon]="circleX" class="text-2xl text-center"></fa-icon>
+      <fa-icon [icon]="circleCheck" class="text-2xl text-center"></fa-icon>
+      <fa-icon [icon]="circleCheck" class="text-2xl text-center"></fa-icon>
+    </div>
+    <div class="grid grid-cols-5 lg:grid-cols-4 py-4 shrink-0 gap-16 border-b border-gray-400">
+      <p class="whitespace-nowrap col-span-2 lg:col-span-1">Refund</p>
+      <fa-icon [icon]="circleX" class="text-2xl text-center"></fa-icon>
+      <fa-icon [icon]="circleX" class="text-2xl text-center"></fa-icon>
+      <fa-icon [icon]="circleCheck" class="text-2xl text-center"></fa-icon>
+    </div>
+  </div>
+</section>

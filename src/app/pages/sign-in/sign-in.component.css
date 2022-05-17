@@ -1,0 +1,19 @@
+
+
+@keyframes textFlashing {
+  0%{
+    transform: translateY(0%) translateX(0%);
+    opacity: 100;
+  }
+  100%{
+    opacity: 70%;
+    transform: translateY(5%)  translateX(2%);
+  }
+}
+.animatedText{
+  animation-name: textFlashing;
+  animation-duration: 1s;
+  animation-direction: alternate-reverse;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+}

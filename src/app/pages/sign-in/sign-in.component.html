@@ -1,0 +1,25 @@
+<section class="grid grid-cols-1 lg:grid-cols-2  w-full overflow-hidden">
+  <div class="flex flex-col gap-16 justify-center mx-auto p-6 w-full lg:p-32 h-screen lg:h-auto">
+    <h1 class="text-4xl font-bold">Sign in</h1>
+    <form class="flex flex-col gap-6" (ngSubmit)="signIn()">
+      <input
+        class="border-2 border-gray-500 w-full px-6 py-3 rounded focus:text-secondary-color focus:outline-secondary-color"
+        type="text" placeholder="Username*" name="username" [(ngModel)]="username">
+      <input
+        class="border-2 border-gray-500 w-full px-6 py-3 rounded focus:text-secondary-color focus:outline-secondary-color"
+        type="password" placeholder="Password*" name="password" [(ngModel)]="password">
+      <input
+        class="py-2 border-2 bg-primary-color text-white text-xl border-transparent rounded hover:border-secondary-color hover:text-black hover:font-extrabold hover:bg-white hover:scale-105 transition-all"
+        type="submit" value="Enter">
+
+    </form>
+  </div>
+  <div class="flex justify-center items-center bg-secondary-color w-full h-screen">
+    <div class="animatedText flex flex-col px-6 lg:px-32  gap-6 text-white z-50">
+      <h1 class=" text-6xl font-extrabold">Explore your <br>imagination</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam commodi consequuntur delectus dolorem
+        doloremque eligendi eveniet ex fuga id iure laborum minus, modi neque, nostrum obcaecati perspiciatis quae sit
+        ullam!</p>
+    </div>
+  </div>
+</section>
